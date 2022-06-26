@@ -102,6 +102,7 @@ function CreateEvent() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            maxlength="50"
             required
           />
         </div>
@@ -115,6 +116,7 @@ function CreateEvent() {
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            maxlength="300"
             required
           />
         </div>
