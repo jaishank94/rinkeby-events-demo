@@ -4,6 +4,7 @@ import { useMoralis } from "react-moralis";
 import Moralis from "moralis";
 import Web3 from "web3";
 import { contractABI, contractAddress } from "../../contract";
+import Head from "next/head";
 const web3 = new Web3(Web3.givenProvider);
 
 function CreateEvent() {
@@ -79,6 +80,10 @@ function CreateEvent() {
 
   return (
     <div className="flex w-screen h-screen items-center justify-center">
+      <Head>
+        <title>Event Dapp</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <form onSubmit={onSubmit}>
         <label
           className="text-sm font-medium text-black dark:text-gray-500 text-right cursor-pointer"
@@ -121,6 +126,7 @@ function CreateEvent() {
             type="file"
             className="border-[1px] p-2 text-lg border-black w-full"
             onChange={(e) => setFile(e.target.files[0])}
+            accept="image/png, image/gif, image/jpeg"
             required
           />
         </div>

@@ -13,6 +13,7 @@ function Events() {
   const { isAuthenticated, logout, user } = useMoralis();
   const router = useRouter();
   const [eventList, setEventList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) router.push("/");
@@ -21,6 +22,7 @@ function Events() {
 
   const fetchNFTsForContract = async () => {
     try {
+      setIsLoading(true);
       // interact with smart contract
       const contract = new web3.eth.Contract(contractABI, contractAddress);
       const response = await contract.methods.get_events().call();
@@ -34,7 +36,9 @@ function Events() {
         }
       }
       setEventList(evntList);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.log("error", err);
     }
   };
@@ -89,7 +93,8 @@ function Events() {
       </div>
 
       <div className="px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
-        {eventList.length > 0 &&
+        {!isLoading &&
+          eventList.length > 0 &&
           eventList.map((event, key) => {
             return (
               <div
@@ -138,7 +143,7 @@ function Events() {
             );
           })}
       </div>
-      {eventList.length == 0 && (
+      {!isLoading && eventList.length == 0 && (
         <div className="flex justify-center align-center">
           No event found.{" "}
           <span
@@ -149,6 +154,9 @@ function Events() {
             Create new event
           </span>
         </div>
+      )}
+      {isLoading && (
+        <div className="flex justify-center align-center">Loading...</div>
       )}
     </div>
   );
