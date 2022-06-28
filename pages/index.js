@@ -35,6 +35,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+          <div className="p-2 text-red-800 text-center">Please use Rinkeby Network Only</div>
       </div>
     </div>
   );
