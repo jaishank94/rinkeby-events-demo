@@ -44,7 +44,7 @@ function CreateEvent() {
         description,
         image: file1url,
         ticketCount,
-        ticketPrice: price,
+        ticketPrice: Moralis.Units.ETH(price, "18"),
       };
       const file2 = new Moralis.File(`${name}metadata.json`, {
         base64: Buffer.from(JSON.stringify(metadata)).toString("base64"),
@@ -60,7 +60,7 @@ function CreateEvent() {
           description,
           file1url,
           ticketCount,
-          price,
+          Moralis.Units.ETH(price, "18"),
           metadataurl
         )
         .send({ from: user.get("ethAddress") });

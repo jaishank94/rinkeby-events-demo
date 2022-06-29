@@ -148,8 +148,10 @@ function EventDetails() {
                       <div className="flex items-center space-x-3">
                         <p className="text-gray-400">
                           {Number.parseFloat(
-                            parseFloat(eventInfo.ticket_price) * mintAmount
-                          ).toFixed(2)}{" "}
+                            parseFloat(
+                              Moralis.Units.FromWei(eventInfo.ticket_price)
+                            ) * mintAmount
+                          )}{" "}
                           ETH
                         </p>{" "}
                         <span className="text-gray-400">+ GAS</span>
